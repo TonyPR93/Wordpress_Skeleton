@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  web:
+    image: wordpress
+    ports:
+      - "127.0.0.3:8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_PASSWORD: password
+    depends_on:
+      - mysql
+    volumes:
+      - ./wordpress:/var/www/html
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: my-wpdb
+    volumes:
+      - ./mysql:/var/lib/mysql
